@@ -1,3 +1,8 @@
+  
+  const express = require('express');
+  const app = express();
+  const port = 3000;
+  
   const shoes = [
       { name: "Birkenstocks", price: 50, type: "sandal" },
       { name: "Air Jordans", price: 500, type: "sneaker" },
@@ -7,7 +12,6 @@
       { name: "Jet Boots", price: 1000, type: "boot" },
       { name: "Fifty-Inch Heels", price: 175, type: "heel" }
   ];
-
 
 
 
@@ -27,18 +31,6 @@ app.get("/collectibles", (req, res) => {
 
     res.send("Item not found.");
 });
-
-const express = require('express');
-const app = express();
-const port = 3000;
-
-app.get("/collectibles", (req, res) => {
-    const index = Number(req.query.index);
-    const item = collectibles[index];
-
-    if (item) {
-        res.send(`The price of the ${item.name} is $${item.price}.`);
-    }
 
 app.get("/greeting/:username", (req, res) => {
     const username = req.params.username;
@@ -70,12 +62,12 @@ app.get('/hello', (req, res) => {
 app.get("/shoes", (req, res) => {
     let results = shoes;
 
-    if (req.query["min price"]) {
+    if (req.query["min-price"]) {
         results = results.filter(shoe => shoe.price >= Number(req.query["min price"]));
 
     }
 
-    if (req.query["max price"]) {
+    if (req.query["max-price"]) {
         results = results.filter(shoe => shoe.price <= Number(req.query["max price"]));
     }
 
