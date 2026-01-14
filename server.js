@@ -21,7 +21,7 @@ const collectibles = [
     { name: "puzzle", price: 7 }
 ];
  
-app.get("/collectibles", (req, res) => {
+app.get("/collectibles/:index", (req, res) => {
     const index = Number(req.params.index);
     const item = collectibles[index];
 
@@ -37,10 +37,6 @@ app.get("/greeting/:username", (req, res) => {
     res.send(`Hello, ${username}! Welcome to our site.`);
 });
 
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
 
 
 app.get("/roll/:number", (req, res) => {
@@ -63,12 +59,12 @@ app.get("/shoes", (req, res) => {
     let results = shoes;
 
     if (req.query["min-price"]) {
-        results = results.filter(shoe => shoe.price >= Number(req.query["min price"]));
+        results = results.filter(shoe => shoe.price >= Number(req.query["min-price"]));
 
     }
 
     if (req.query["max-price"]) {
-        results = results.filter(shoe => shoe.price <= Number(req.query["max price"]));
+        results = results.filter(shoe => shoe.price <= Number(req.query["max-price"]));
     }
 
     if (req.query.type) {
@@ -77,5 +73,9 @@ app.get("/shoes", (req, res) => {
 
     res.send(results);
 });
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});  app.use(express.json());
 
 
